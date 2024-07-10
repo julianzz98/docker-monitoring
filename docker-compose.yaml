@@ -44,14 +44,16 @@ services:
   deegree-358:
     image: deegree/deegree3-docker:3.5.8
     container_name: deegree-358
+    ports:
+      - 8135:8080
+    environment:
+      - JAVA_OPTS=-Xms5120M -Xmx27648m -XX:MaxMetaspaceSize=5700m -XX:ReservedCodeCacheSize=1600m
     depends_on:
       - database
     links:
       - database
     volumes:
       - ${HOME}/.deegree:/root/.deegree:rw
-    ports:
-      - 8135:8080
   
   database:
     image: postgis/postgis:16-3.4
